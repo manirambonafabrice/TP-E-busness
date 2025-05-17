@@ -1,0 +1,78 @@
+
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12 mb-12" >
+ 
+        <!-- Nav tabs -->
+        <tabset >
+          <tab heading="Modification zone" style="overflow-x: scroll;">
+            <!-- <a class="dropdown-item" style="color: red;"  data-toggle="modal" (click)="dangerModal1.show()"><i class="fa fa-lock"></i> Logout</a> -->
+           
+            <div class="col-md-12 sm-12 xs-12">
+               
+                <form [formGroup]="user_form"   (ngSubmit)="submit()">
+            
+
+                    <div class="container-fluid row" >
+                          
+         
+                        
+                         <div class="col-md-3 sm-12 xs-12 form-group">
+                             
+                             <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                 <mat-label>Zone: <span style="color: red;">*</span></mat-label>
+                                 <input matInput formControlName="zone_id" id="zone_id" autocomplete="off" > 
+                                 
+                             </mat-form-field>
+         
+                             <span style="color: red;" class="error" *ngIf="user_form.controls['zone_id'].invalid && (user_form.controls['zone_id'].dirty || user_form.controls['zone_id'].touched)" >
+                                 Verifier bien ce champ
+                             </span>      
+                         </div>
+                         <div class="col-md-3 sm-12 xs-12 form-group" >
+                             
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>Latitude: <span style="color: red;">*</span></mat-label>
+                                <input type="number" matInput formControlName="latitude" id="zone_id" autocomplete="off" > 
+                                
+                            </mat-form-field>
+        
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['latitude'].invalid && (user_form.controls['latitude'].dirty || user_form.controls['latitude'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                        </div>
+                        <div class="col-md-3 sm-12 xs-12 form-group">
+                             
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>Longitude: <span style="color: red;">*</span></mat-label>
+                                <input type="number" matInput formControlName="longitude" id="zone_id" autocomplete="off" > 
+                                
+                            </mat-form-field>
+        
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['longitude'].invalid && (user_form.controls['longitude'].dirty || user_form.controls['longitude'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                        </div>
+                         <div class="col-md-3 form-group" >
+         
+                             <input type="submit" id="submit"  class="btn btn-primary active form-control" value="Enregistrer">    
+                         
+                         </div>
+                        
+                        
+                     </div>
+         
+                 </form><p>
+                   
+            
+            </div>
+          </tab>
+          
+          
+        </tabset>
+      </div><!--/.col-->
+
+
+    </div><!--/.row-->
+  </div>
+  

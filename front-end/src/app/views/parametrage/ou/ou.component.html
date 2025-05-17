@@ -1,0 +1,89 @@
+
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12 mb-12" >
+          
+          
+        <!-- Nav tabs -->
+        <tabset >
+          <tab heading="Liste des Unités d'organisation" style="overflow-x: scroll;">
+            <!-- <a class="dropdown-item" style="color: red;"  data-toggle="modal" (click)="dangerModal1.show()"><i class="fa fa-lock"></i> Logout</a> -->
+           
+            <div class="col-md-12 sm-12 xs-12">
+               
+            <table datatable [dtOptions]="dtOptions_actif" class="table table-bordered" width="100%"></table>
+            
+            </div>
+          </tab>
+
+
+          <tab heading="Nouveau">
+           
+            <form [formGroup]="user_form"   (ngSubmit)="submit()">
+                <fieldset class="border p-2" ><legend class="w-auto" >Ajout d'Unité d'organisation</legend>
+
+               <div class="container-fluid row" >
+                     
+                    <div class="col-md-4 sm-12 xs-12 form-group">
+                    
+                        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                            <mat-label>Unité d'organisation: <span style="color: red;">*</span></mat-label>
+                            <input matInput formControlName="nom" id="nom" autocomplete="off" > 
+                            
+                        </mat-form-field>
+
+                <span style="color: red;" class="error" *ngIf="user_form.controls['nom'].invalid && (user_form.controls['nom'].dirty || user_form.controls['nom'].touched)" >
+                    Verifier bien ce champ
+                </span>      
+                    </div>
+
+                    <div class="col-md-4 sm-12 xs-12 form-group">
+                    
+                        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                            <mat-label>Abreviation:</mat-label>
+                            <input matInput formControlName="nom1" id="nom1" autocomplete="off" > 
+                            
+                        </mat-form-field>
+     
+                    </div>
+                    <div class="col-md-4 sm-12 xs-12 form-group">
+                        <mat-form-field appearance="fill"  style="width: 100%;">
+                            <mat-label>Chef</mat-label>
+                            <mat-select formControlName="id_ut" (click)="refresh()" >
+                              <!-- <input matInput formControlName="nom1" id="nom1" autocomplete="off" >  -->
+                              <mat-option>
+                                <ngx-mat-select-search formControlName="filter"
+                                placeholderLabel="Research..." 
+                                 (keyup)="onKey($event.target.value)" (click)="refresh()"></ngx-mat-select-search>
+                              
+                              </mat-option>
+                                  <mat-option  [value]="" style="color: red;">
+                                    NULL
+                                  </mat-option>
+                              <mat-option *ngFor="let util of utilisateurs_filtre" [value]="util.ID">
+                                {{util.NOM}} {{util.PRENOM}} {{util.TELEPHONE}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                   
+                   
+                </div>
+                <div class="col-md-12 form-group">
+
+                    <input type="submit" id="submit"  class="btn btn-light active form-control" value="Enregistrer">    
+                
+            </div>
+               
+            </fieldset>
+            </form><p>
+
+          </tab>
+          
+        </tabset>
+      </div><!--/.col-->
+
+
+    </div><!--/.row-->
+  </div>
+  

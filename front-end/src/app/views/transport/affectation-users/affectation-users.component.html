@@ -1,0 +1,90 @@
+
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12 mb-12" >
+          
+          
+        <!-- Nav tabs -->
+        <tabset >
+          <tab heading="Affectation des employés" style="overflow-x: scroll;">
+            <!-- <a class="dropdown-item" style="color: red;"  data-toggle="modal" (click)="dangerModal1.show()"><i class="fa fa-lock"></i> Logout</a> -->
+           
+            
+              <form [formGroup]="user_form" (ngSubmit)="submit()">
+                <div class="row">
+                    <div  class="col-md-10" >
+                        <!-- <input type="radio" (change)="handleChange(rol.ID_ROLE,rol.DESCRIPTION_ROLE)" [id]="rol.ID_ROLE" name="fav_language" [value]="rol.ID_ROLE"  [checked]="rol.ID_ROLE==1">
+                        <label [for]="rol.ID_ROLE">{{rol.DESCRIPTION_ROLE}}</label><br> -->
+                        <mat-form-field appearance="fill"  style="width: 100%;" >
+                            <mat-label>Point Focal (Bureau)</mat-label>
+                            <mat-select formControlName="points"  (selectionChange)="select_point($event)">
+                                <mat-option  [value]="" style="color: red;">
+                                    NULL
+                                  </mat-option>
+                              <mat-option *ngFor="let p of points" [value]="p.ID_POINT">
+                                {{p.APPELLATION_POINT}}({{p.LOCALITE}},{{p.ZONE_NAME}},{{p.COMMUNE_NAME}},{{p.PROVINCE_NAME}})
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                </div>
+
+                
+            </form>
+
+            <section class="example-section">
+              <span class="example-list-section">
+                <mat-checkbox class="example-margin"
+                              [checked]="allComplete"
+                              [color]="primary"
+                              [indeterminate]="someComplete()"
+                              (change)="setAll($event.checked)">
+                  {{task.name}}
+                </mat-checkbox>
+              </span>
+              <span class="example-list-section">
+                <div class="row">
+                    <div *ngFor="let subtask of task.subtasks" class="col-md-4 sm-4 xs-4" >
+                      <!-- <input type="checkbox" formControlName="urls" [id]="url.ID_URL" name="fav_language" [value]="url.ID_URL" [checked]="ses_url.includes(url.ID_URL)"><label [for]="url.ID_URL">{{url.LINK_URL}}</label><br> -->
+                      <mat-checkbox [(ngModel)]="subtask.completed"
+                      [color]="primary"
+                      [checked]="ses_url.includes(subtask.ID)"
+                      (ngModelChange)="updateAllComplete()">
+                        <span *ngIf="subtask.ID_POINT==0" style="color: red;">
+                            {{subtask.NOM}} {{subtask.PRENOM}} ({{subtask.TELEPHONE}})
+                        </span>
+                        <span *ngIf="subtask.ID_POINT>0" >
+                            {{subtask.NOM}} {{subtask.PRENOM}} ({{subtask.TELEPHONE}})
+                        </span>
+                      </mat-checkbox>
+                    </div>
+               
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button  type="button" class="btn  btn-success form-control" (click)="saves_permissions()">Enregistrer</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button  type="button" class="btn  btn-info form-control" (click)="Liste()">Génerer une liste</button>
+                    </div>
+                </div>
+                
+              </span>
+            </section>
+           
+            
+          </tab>
+
+
+          <!-- <tab heading="Nouveau Menu">
+           
+
+          </tab> -->
+          
+        </tabset>
+      </div><!--/.col-->
+
+
+    </div><!--/.row-->
+  </div>
+  

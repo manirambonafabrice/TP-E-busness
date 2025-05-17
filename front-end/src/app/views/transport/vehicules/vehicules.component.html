@@ -1,0 +1,126 @@
+
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12 mb-12" >
+ 
+        <!-- Nav tabs -->
+        <tabset >
+             
+                <tab heading="Liste des vehicules" style="overflow-x: scroll;">
+                  <!-- <a class="dropdown-item" style="color: red;"  data-toggle="modal" (click)="dangerModal1.show()"><i class="fa fa-lock"></i> Logout</a> -->
+                 
+                  <div class="col-md-12 sm-12 xs-12">
+                     
+                  <table datatable [dtOptions]="dtOptions" class="table table-bordered" width="100%"></table>
+                  
+                  </div>
+                </tab>
+      
+          <tab heading="Nouvelle vehicule" style="overflow-x: scroll;">
+            <!-- <a class="dropdown-item" style="color: red;"  data-toggle="modal" (click)="dangerModal1.show()"><i class="fa fa-lock"></i> Logout</a> -->
+           
+            <div class="col-md-12 sm-12 xs-12">
+               
+                <form [formGroup]="user_form"   (ngSubmit)="submit()">
+            
+
+                    <div class="container-fluid row" >
+                          
+         
+                        
+                         <div class="col-md-6 sm-12 xs-12 form-group">
+                             
+                             <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                 <mat-label>Plaque: <span style="color: red;">*</span></mat-label>
+                                 <input matInput formControlName="plaque" id="raison" autocomplete="off" > 
+                                 
+                             </mat-form-field>
+         
+                             <span style="color: red;" class="error" *ngIf="user_form.controls['plaque'].invalid && (user_form.controls['plaque'].dirty || user_form.controls['plaque'].touched)" >
+                                 Verifier bien ce champ
+                             </span>      
+                         </div>
+                         <div class="col-md-6 sm-12 xs-12 form-group">
+                        
+                            <mat-form-field appearance="fill"  style="width: 100%;" >
+                              <mat-label>Type de vehicule<span style="color: red;">*</span></mat-label>
+                              <mat-select formControlName="type_vehicule" >
+                                  <mat-option  [value]="" style="color: red;">
+                                      NULL
+                                    </mat-option>
+                                <mat-option *ngFor="let r of typeVehiculeInfo" [value]="r.ID_VEHICULE_TYPE">
+                                  {{r.NOMBRE_PASSAGERS}}({{r.APPELLATION}})
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['type_vehicule'].invalid && (user_form.controls['type_vehicule'].dirty || user_form.controls['type_vehicule'].touched)" >
+                                Verifier bien ce champ
+                            </span>
+                          </div>
+                          <div class="col-md-6 sm-12 xs-12 form-group">
+                             
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>Nombre de place: <span style="color: red;">*</span></mat-label>
+                                <input type="number" matInput formControlName="nombre" id="nombre" autocomplete="off" > 
+                                
+                            </mat-form-field>
+        
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['nombre'].invalid && (user_form.controls['nombre'].dirty || user_form.controls['nombre'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                        </div>
+                         
+                        <div class="col-md-6 sm-12 xs-12 form-group">
+                             
+                            <!-- <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>LKogo: <span style="color: red;">*</span></mat-label>
+                                <input type="file"  accept="image/*"  matInput formControlName="TEL" id="zone_id" autocomplete="off" > 
+                                
+                            </mat-form-field> -->
+                            <label>Foto</label>
+                            <input type="file" formControlName="foto" id="foto" accept="image/*"  autocomplete="off" (change)="fileChangeEvent($event)">
+        
+                                  
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <image-cropper
+                                [imageChangedEvent]="imageChangedEvent"
+                                [maintainAspectRatio]="false"
+                                [aspectRatio]="6 / 4"
+                                format="png"
+                                (imageCropped)="imageCropped($event)"
+                                (imageLoaded)="imageLoaded()"
+                                (cropperReady)="cropperReady()"
+                                (loadImageFailed)="loadImageFailed()"
+                            ></image-cropper>
+                                        
+                            </div>
+                            
+                            <div class="col-md-3 ">
+                                <img *ngIf="croppedImage" [src]="croppedImage"  style="width: 100%;"/>
+                            </div>
+                         </div>
+                         <div class="col-md-12 form-group" >
+         
+                             <input type="submit" id="submit"  class="btn btn-primary active form-control" value="Enregistrer">    
+                         
+                         </div>
+                        
+                        
+                     </div>
+         
+                 </form><p>
+                   
+            
+            </div>
+          </tab>
+          
+          
+        </tabset>
+      </div><!--/.col-->
+
+
+    </div><!--/.row-->
+  </div>
+  

@@ -1,0 +1,182 @@
+
+<div  *ngIf="is_threre_users" id="layoutAuthentication" style="background: #DADADA;height: 100vh; ">
+    <div id="layoutAuthentication_content" >
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+  
+                          <div  *ngIf="probleme"  class='alert alert-danger'> 
+                              ECHEC ! PROBLEME DE CONNEXION SUR LE SERVEUR
+                          </div>
+  
+                            <div  *ngIf="!noConnected"  class='alert alert-danger'> 
+                                {{message}}
+                            </div>
+                            
+                            <div class="card-header">
+                                <center><img  class="images" [src]="imageSrc" style="width:30%"></center>
+                                <!-- <h3 class="text-center font-weight-light my-4">Authentification</h3> -->
+                            </div>
+                            <div class="card-body">
+                                <form [formGroup]="auth_form" (ngSubmit)="submit()">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="inputEmailAddress"></label>
+                                        <input class="form-control py-4"  formControlName="username" type="text" placeholder="Email ou Nom d'utilisateur" autocomplete="off" />
+                                        <span style="color: red;" class="error" *ngIf="auth_form.controls['username'].invalid && (auth_form.controls['username'].dirty || auth_form.controls['username'].touched)" >
+                                            Username is required
+                                        </span>
+                                    </div>
+                                    <div class="form-group ">
+                                    <div class="input-group">
+                                        <label class="small mb-1" for="inputPassword"></label>
+                                        <input class="form-control py-4" id="pwd" 
+                                        [type]="showPasswordOnPress ? 'text' : 'password'" formControlName="pwd" placeholder="Mot de passe"  autocomplete="off" appPassword/>
+                                        
+                                        <div class="input-group-append" (mousedown)="showPasswordOnPress = !showPasswordOnPress;" (click)="focus()"
+                                              (mouseup)="showPasswordOnPress = !showPasswordOnPress">
+                                                <span class="input-group-text" >
+                                                    <i alt="show" class="fa fa-eye eye-show"
+                                                       [class.hide]="showPasswordOnPress"></i>
+                                                    <i alt="hide" style="color: red;" class="fa fa-eye-slash"
+                                                       [class.hide]="!showPasswordOnPress"></i>
+                                                </span>
+                                              </div>
+                                    </div>  
+                                    <span style="color: red;" class="error" *ngIf="auth_form.controls['pwd'].invalid && (auth_form.controls['pwd'].dirty || auth_form.controls['pwd'].touched)" >
+                                        Password is required
+                                    </span>
+                                </div>  
+  
+  
+  
+                                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                        <a >Mot de passe oublié?</a>
+                                        <button type="submit" (click)="noConnected=true " [disabled]="auth_form.invalid" class="btn btn-primary">Entrer</button>
+                                    </div>
+                                </form>
+                            </div>
+  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+  
+  </div>
+  <div *ngIf="!is_threre_users" id="" style="background: #DADADA;margin-bottom: 50px;">
+      <div id="layoutAuthentication_content" >
+          <main>
+              <div class="container">
+                  <div class="row justify-content-center">
+                      <div class="col-lg-6">
+                          <div class="card shadow-lg border-0 rounded-lg mt-5">
+    
+                      
+                            
+                              <div class="card-header"><h3 class="text-center font-weight-light my-4">Premier acteur</h3></div>
+                              <div class="card-body">
+                                  <form [formGroup]="user_form" (ngSubmit)="submit_user_form()">
+                                      <div class="form-group">
+                                          <label class="small mb-1" for="inputEmailAddress"></label>
+                                          <input class="form-control py-4"  formControlName="nom" type="text" placeholder="Nom" autocomplete="off" />
+                                          <span style="color: red;" class="error" *ngIf="user_form.controls['nom'].invalid && (user_form.controls['nom'].dirty || user_form.controls['nom'].touched)" >
+                                             required
+                                          </span>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="small mb-1" for="inputEmailAddress"></label>
+                                          <input class="form-control py-4"  formControlName="prenom" type="text" placeholder="Prénom" autocomplete="off" />
+                                          <span style="color: red;" class="error" *ngIf="user_form.controls['prenom'].invalid && (user_form.controls['prenom'].dirty || user_form.controls['prenom'].touched)" >
+                                              required
+                                          </span>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="small mb-1" for="inputEmailAddress"></label>
+                                          <input class="form-control py-4"  formControlName="tel" type="number" placeholder="Télephone" autocomplete="off" />
+                                          <span style="color: red;" class="error" *ngIf="user_form.controls['tel'].invalid && (user_form.controls['tel'].dirty || user_form.controls['tel'].touched)" >
+                                              required
+                                          </span>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="small mb-1" for="inputEmailAddress"></label>
+                                          <input class="form-control py-4"  formControlName="email" type="text" placeholder="Email" autocomplete="off" />
+                                          <span style="color: red;" class="error" *ngIf="user_form.controls['email'].invalid && (user_form.controls['email'].dirty || user_form.controls['email'].touched)" >
+                                              required
+                                          </span>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="small mb-1" for="inputEmailAddress"></label>
+                                          <input class="form-control py-4"  formControlName="user_name" type="text" placeholder="Nom d'utilisateur" autocomplete="off" />
+                                          <span style="color: red;" class="error" *ngIf="user_form.controls['user_name'].invalid && (user_form.controls['user_name'].dirty || user_form.controls['user_name'].touched)" >
+                                              required
+                                          </span>
+                                      </div>
+                                      <div class="form-group ">
+                                          <div class="input-group">
+                                              <label class="small mb-1" for="inputPassword"></label>
+                                              <input class="form-control py-4" id="pwd" 
+                                              [type]="showPasswordOnPress ? 'text' : 'password'" formControlName="pwd" placeholder="Mot de passe"  autocomplete="off" appPassword/>
+                                              
+                                              <div class="input-group-append" (mousedown)="showPasswordOnPress = !showPasswordOnPress;" (click)="focus()"
+                                                  (mouseup)="showPasswordOnPress = !showPasswordOnPress">
+                                                      <span class="input-group-text" >
+                                                          <i alt="show" class="fa fa-eye eye-show"
+                                                          [class.hide]="showPasswordOnPress"></i>
+                                                          <i alt="hide" style="color: red;" class="fa fa-eye-slash"
+                                                          [class.hide]="!showPasswordOnPress"></i>
+                                                      </span>
+                                                  </div>
+                                          </div>  
+                                          <span style="color: red;" class="error" *ngIf="user_form.controls['pwd'].invalid && (user_form.controls['pwd'].dirty || user_form.controls['pwd'].touched)" >
+                                              required
+                                          </span>
+                                      </div>  
+                                      <div class="form-group ">
+                                          <div class="input-group">
+                                              <label class="small mb-1" for="inputPassword"></label>
+                                              <input class="form-control py-4" id="pwd" 
+                                              [type]="showPasswordOnPress ? 'text' : 'password'" formControlName="pwd1" placeholder="Confirmer Mot de passe"  autocomplete="off" appPassword/>
+                                              
+                                              <div class="input-group-append" (mousedown)="showPasswordOnPress = !showPasswordOnPress;" (click)="focus()"
+                                                  (mouseup)="showPasswordOnPress = !showPasswordOnPress">
+                                                      <span class="input-group-text" >
+                                                          <i alt="show" class="fa fa-eye eye-show"
+                                                          [class.hide]="showPasswordOnPress"></i>
+                                                          <i alt="hide" style="color: red;" class="fa fa-eye-slash"
+                                                          [class.hide]="!showPasswordOnPress"></i>
+                                                      </span>
+                                                  </div>
+                                          </div>  
+                                          <span style="color: red;" class="error" *ngIf="user_form.controls['pwd1'].invalid && (user_form.controls['pwd1'].dirty || user_form.controls['pwd1'].touched)" >
+                                              required
+                                          </span>
+                                      </div>  
+    
+    
+    
+                                      <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                          <!-- <a >Mot de passe oublié?</a> -->
+                                          <button type="submit" (click)="noConnected=true " [disabled]="user_form.invalid" class="btn btn-primary">Enregister</button>
+                                      </div>
+                                  </form>
+                              </div>
+    
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </main>
+      </div>
+    
+    </div>
+  <div class="container-fluid py-4 bg-light mt-auto" style="position: fixed;bottom: 1px">
+  <div class="d-flex align-items-center justify-content-between small">
+    <!-- <div class="text-muted">Copyright &copy; {{annee}}<a href="https://investpaytechnologies.com/" target="_blank" style="color: red"> Invest and Pay Technologies</a></div> -->
+    <span class="ml-auto" style="color: red;">Powered by   <a href="https://investpaytechnologies.com/"  target="_blank" style="color: blue;">INVEST AND PAY TECHNOLOGIES</a></span>
+   
+    <!-- <span  class="ml-" style="color: red;font-size: 14px;">Powered by <a href="https://fmanirambona.wordpress.com/" target="_blank">Fabrice Manirambona +257 75 158 793 / +257 79 158 793</a></span> -->
+  </div>
+  </div>

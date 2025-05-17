@@ -1,0 +1,168 @@
+
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12 mb-12" >
+          
+          
+        <!-- Nav tabs -->
+        <tabset >
+
+          <tab heading="Nouveau">
+           
+            <form [formGroup]="auth_form" >
+                <div class="row" style="margin-bottom:50px">
+                <div class="col-md-3">
+                    <label class="">Nombre de congés initiale</label>
+                    <input class="form-control "  formControlName="nb_jour" type="number"  autocomplete="off" />
+                    <span style="color: red;" class="error" *ngIf="auth_form.controls['nb_jour'].invalid && (auth_form.controls['nb_jour'].dirty || auth_form.controls['nb_jour'].touched)" >
+                        Verifier bien ce champ
+                    </span> 
+                </div>
+              
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="">Apres combien de mois d'embauche pour avoir droit aux congés</label>
+                        <input class="form-control "  formControlName="temps" type="number"  autocomplete="off" />
+                        <span style="color: red;" class="error" *ngIf="auth_form.controls['temps'].invalid && (auth_form.controls['temps'].dirty || auth_form.controls['temps'].touched)" >
+                            Verifier bien ce champ
+                        </span> 
+                    </div>
+                   </div>
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">                   
+                    <input (change)="handleChange()" class="" id="regulier" formControlName="regulier" type="checkbox" [checked]="check==1"/>
+                    <label for="regulier">Ajout régulier</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="">Nombre de congés à ajouter</label>
+                    <input class="form-control "  formControlName="nb_jour_ajout" type="number"  autocomplete="off" /> 
+                    <span style="color: red;" class="error" *ngIf="auth_form.controls['nb_jour_ajout'].invalid && (auth_form.controls['nb_jour_ajout'].dirty || auth_form.controls['nb_jour_ajout'].touched)" >
+                        Verifier bien ce champ
+                    </span> 
+                </div>
+                <div class="col-md-4">
+                    <label class="">Nombre d'années</label>
+                    <input class="form-control "  formControlName="nb_annee" type="number"  autocomplete="off" />
+                    <span style="color: red;" class="error" *ngIf="auth_form.controls['nb_annee'].invalid && (auth_form.controls['nb_annee'].dirty || auth_form.controls['nb_annee'].touched)" >
+                        Verifier bien ce champ
+                    </span> 
+                    
+                </div>
+                <div class="col-md-4">
+                    <label class=""></label><p></p>
+                    
+                    <button *ngIf="!checked" class="btn btn-success" (click)="controle_input('add',1)">+</button>                   
+                    
+                </div>
+                
+            </div>
+            
+            <div class="row" *ngIf="add1">
+                <div class="col-md-4">
+                    <label class="">Nombre de congés à ajouter</label>
+                    <input class="form-control "  formControlName="nb_jour_ajout1" type="number"  autocomplete="off" />
+                    
+                </div>
+                <div class="col-md-4">
+                    <label class="">Nombre d'années</label>
+                    <input class="form-control "  formControlName="nb_annee1" type="number"  autocomplete="off" />
+                    
+                    
+                </div>
+                <div class="col-md-4">
+                    <label class=""></label><p></p>
+                    
+                    <button class="btn btn-success" (click)="controle_input('add',2)">+</button>
+                    <button class="btn btn-danger" (click)="controle_input('remove',1)">X</button>
+                    
+                </div>
+                
+            </div>
+            <div class="row"  *ngIf="add2">
+                <div class="col-md-4">
+                    <label class="">Nombre de congés à ajouter</label>
+                    <input class="form-control "  formControlName="nb_jour_ajout2" type="number"  autocomplete="off" />
+                    
+                </div>
+                <div class="col-md-4">
+                    <label class="">Nombre d'années</label>
+                    <input class="form-control "  formControlName="nb_annee2" type="number"  autocomplete="off" />
+                    
+                    
+                </div>
+                <div class="col-md-4">
+                    <label class=""></label><p></p>
+                    
+                    <button class="btn btn-success" (click)="controle_input('add',3)">+</button>
+                    <button class="btn btn-danger" (click)="controle_input('remove',2)">X</button>
+                    
+                </div>
+                
+            </div>
+            <div class="row"  *ngIf="add3">
+                <div class="col-md-4">
+                    <label class="">Nombre de congés à ajouter</label>
+                    <input class="form-control "  formControlName="nb_jour_ajout3" type="number"  autocomplete="off" />
+                    
+                </div>
+                <div class="col-md-4">
+                    <label class="">Nombre d'années</label>
+                    <input class="form-control "  formControlName="nb_annee3" type="number"  autocomplete="off" />
+                    
+                    
+                </div>
+                <div class="col-md-4">
+                    <label class=""></label><p></p>
+                    
+                    <button class="btn btn-success" (click)="controle_input('add',4)">+</button>
+                    <button class="btn btn-danger" (click)="controle_input('remove',3)">X</button>
+                    
+                </div>
+                
+            </div>
+            <div class="row"  *ngIf="add4">
+                <div class="col-md-4">
+                    <label class="">Nombre de congés à ajouter</label>
+                    <input class="form-control "  formControlName="nb_jour_ajout4" type="number"  autocomplete="off" />
+                    
+                </div>
+                <div class="col-md-4">
+                    <label class="">Nombre d'années</label>
+                    <input class="form-control "  formControlName="nb_annee4" type="number"  autocomplete="off" />
+                    
+                    
+                </div>
+                <div class="col-md-4">
+                    <label class=""></label><p></p>
+                    
+                    <!-- <button class="btn btn-success" (click)="controle_input('add',4)">+</button> -->
+                    <button class="btn btn-danger" (click)="controle_input('remove',4)">X</button>
+                    
+                </div>
+                
+            </div>
+                
+            
+  
+
+
+
+                <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                    
+                    <button type="submit" (click)="noConnected=true;submit_form() " class="btn btn-light active form-control">Save</button>
+                </div>
+            </form>
+
+          </tab>
+          
+        </tabset>
+      </div><!--/.col-->
+
+
+    </div><!--/.row-->
+  </div>
+  

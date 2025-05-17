@@ -1,0 +1,137 @@
+
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12 mb-12" >
+ 
+        <!-- Nav tabs -->
+        <tabset >
+
+      
+          <tab heading="Modification raison sociale" style="overflow-x: scroll;">
+            <!-- <a class="dropdown-item" style="color: red;"  data-toggle="modal" (click)="dangerModal1.show()"><i class="fa fa-lock"></i> Logout</a> -->
+           
+            <div class="col-md-12 sm-12 xs-12">
+               
+                <form [formGroup]="user_form"   (ngSubmit)="submit()">
+            
+
+                    <div class="container-fluid row" >
+                          
+         
+                        
+                         <div class="col-md-6 sm-12 xs-12 form-group">
+                             
+                             <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                 <mat-label>Raison sociale: <span style="color: red;">*</span></mat-label>
+                                 <input matInput formControlName="raison" id="raison" autocomplete="off" > 
+                                 
+                             </mat-form-field>
+         
+                             <span style="color: red;" class="error" *ngIf="user_form.controls['raison'].invalid && (user_form.controls['raison'].dirty || user_form.controls['raison'].touched)" >
+                                 Verifier bien ce champ
+                             </span>      
+                         </div>
+                         <div class="col-md-6 sm-12 xs-12 form-group" >
+                             
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>NIF: <span style="color: red;">*</span></mat-label>
+                                <input  matInput formControlName="NIF" id="zone_id" autocomplete="off" > 
+                                
+                            </mat-form-field>
+        
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['NIF'].invalid && (user_form.controls['NIF'].dirty || user_form.controls['NIF'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                        </div>
+                        <div class="col-md-6 sm-12 xs-12 form-group">
+                             
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>RC: <span style="color: red;">*</span></mat-label>
+                                <input  matInput formControlName="RC" id="zone_id" autocomplete="off" > 
+                                
+                            </mat-form-field>
+        
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['RC'].invalid && (user_form.controls['RC'].dirty || user_form.controls['RC'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                        </div>
+                        <div class="col-md-6 sm-12 xs-12 form-group">
+                             
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>TEL: <span style="color: red;">*</span></mat-label>
+                                <input type="number" matInput formControlName="TEL" id="zone_id" autocomplete="off" > 
+                                
+                            </mat-form-field>
+        
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['TEL'].invalid && (user_form.controls['TEL'].dirty || user_form.controls['TEL'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                        </div>
+
+                        <div class="col-md-6 sm-12 xs-12 form-group">
+                             
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>TEL: <span style="color: red;">*</span></mat-label>
+                                <input type="number" matInput formControlName="TEL" id="zone_id" autocomplete="off" > 
+                                
+                            </mat-form-field>
+        
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['TEL'].invalid && (user_form.controls['TEL'].dirty || user_form.controls['TEL'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                        </div>
+                        <div class="col-md-6 sm-12 xs-12 form-group">
+                             
+                            <!-- <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>LKogo: <span style="color: red;">*</span></mat-label>
+                                <input type="file"  accept="image/*"  matInput formControlName="TEL" id="zone_id" autocomplete="off" > 
+                                
+                            </mat-form-field> -->
+                            <input type="file" formControlName="foto" id="foto" accept="image/*"  autocomplete="off" (change)="fileChangeEvent($event)">
+        
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['TEL'].invalid && (user_form.controls['TEL'].dirty || user_form.controls['TEL'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <image-cropper
+                                [imageChangedEvent]="imageChangedEvent"
+                                [maintainAspectRatio]="false"
+                                [aspectRatio]="6 / 4"
+                                format="png"
+                                (imageCropped)="imageCropped($event)"
+                                (imageLoaded)="imageLoaded()"
+                                (cropperReady)="cropperReady()"
+                                (loadImageFailed)="loadImageFailed()"
+                            ></image-cropper>
+                                        
+                            </div>
+                            
+                            <div class="col-md-3 ">
+                                <img *ngIf="croppedImage" [src]="croppedImage"  style="width: 100%;"/>
+                            </div>
+                         </div>
+                         <div class="col-md-12 form-group" >
+         
+                             <input type="submit" id="submit"  class="btn btn-primary active form-control" value="Enregistrer">    
+                         
+                         </div>
+                        
+                        
+                     </div>
+         
+                 </form><p>
+                   
+            
+            </div>
+          </tab>
+          
+          
+        </tabset>
+      </div><!--/.col-->
+
+
+    </div><!--/.row-->
+  </div>
+  

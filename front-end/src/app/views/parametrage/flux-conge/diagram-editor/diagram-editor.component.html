@@ -1,0 +1,12 @@
+<div class="diagramsPanel">
+  <!-- <div #paletteDiv class="paletteDiv"></div> -->
+  <div #diagramDiv class="diagramDiv" style="width: 100%; min-height: 510px;"></div><p></p>
+  <!-- <div style="width: 100%;"><button style="width: 100%;height: 30px; margin-bottom: 20px; background-color: green; color: white;" (click)="save()">Enregistrer</button></div> -->
+  <button class="btn btn-success" style="width: 48%;height: 30px; margin-bottom: 20px; background-color: green; color: white;" (click)="save()">Enregistrer</button>
+  <button class="btn btn-info" style="width: 48%;height: 30px; margin-bottom: 20px; background-color: #63c2de; color: black;" (click)="downloadImage()">Exporter Image</button>
+</div>
+
+<div id="download">
+  <img #canvas>
+  <a #downloadLink></a>
+</div>

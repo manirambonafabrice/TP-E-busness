@@ -1,0 +1,237 @@
+<!-- MODAL CHAUFFEUR -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Infos Chauffeur <span style="color: blue;">{{nom_chauffeur}}</span></h4>
+    <button type="button" class="btn btn-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+    <b>Ce chauffeur <span style="color: blue;">{{nom_chauffeur}}</span> a deja des affectation non cloturées</b><br>
+    <table class='table table-bordered'>
+      <tr><th>ITINERAIRE</th><th>DATE CREATION</th><th>DATE DEPART</th></tr>
+      <tr *ngFor="let inf of infos_chauffeur"><td>{{inf.itin_infos}}</td><td>{{inf.DATE_CREATION}}</td><td>{{inf.DATE_HEURE_DEPART}}</td></tr>
+    </table>
+    <b>Voulez-vous vraiment lui affecter aussi sur ce trajet? </b>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="enlever_chauffeur();modal.close('Save click')">Choisir l'autre</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Continuer</button>
+  </div>
+</ng-template>
+<!-- MODAL CHAUFFEUR -->
+
+<!-- MODAL VEHICULE -->
+<ng-template #content1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Infos vehicule plaque <span style="color: blue;">{{nom_vehicule}}</span></h4>
+    <button type="button" class="btn btn-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+    <b>Ce vehicule de plaque <span style="color: blue;">{{nom_vehicule}}</span> a deja des affectation non cloturées</b><br>
+    <table class='table table-bordered'>
+      <tr><th>ITINERAIRE</th><th>DATE CREATION</th><th>DATE DEPART</th></tr>
+      <tr *ngFor="let inf of infos_chauffeur"><td>{{inf.itin_infos}}</td><td>{{inf.DATE_CREATION}}</td><td>{{inf.DATE_HEURE_DEPART}}</td></tr>
+    </table>
+    <b>Voulez-vous vraiment lui affecter aussi sur ce trajet? </b>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="enlever_vehicule();modal.close('Save click')">Choisir l'autre</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Continuer</button>
+  </div>
+</ng-template>
+<!-- MODAL VEHICULE -->
+
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12 mb-12" >
+                    
+        <!-- Nav tabs -->
+        <tabset type="pills">
+        
+          <tab heading="Modification trajet">
+           
+            
+
+                <form [formGroup]="user_form"   (ngSubmit)="submit()">
+                    <fieldset class="border p-2" ><legend class="w-auto" >Informations</legend>
+    
+                        
+                   <div class="container-fluid row" >
+                         
+                    
+                       
+                    </div>
+
+                    
+                    <div class="container-fluid row" >
+                      <div class="col-md-6 sm-12 xs-12 form-group">
+                        
+                        <mat-form-field appearance="fill"  style="width: 100%;" >
+                          <mat-label>Type trajet<span style="color: red;">*</span></mat-label>
+                          <mat-select formControlName="type_trajet"  (selectionChange)="select_type_trajet($event)">
+                              
+                                <mat-option  [value]="0" >
+                                  Libre
+                                </mat-option>
+                                <mat-option  [value]="1" >
+                                  Parametré
+                                </mat-option>
+                            
+                          </mat-select>
+                        </mat-form-field>
+                        <span style="color: red;" class="error" *ngIf="user_form.controls['type_trajet'].invalid && (user_form.controls['type_trajet'].dirty || user_form.controls['type_trajet'].touched)" >
+                            Verifier bien ce champ
+                        </span>
+                      </div>
+                    </div>
+                    <div class="container-fluid row" >    
+                        <div class="col-md-6 sm-12 xs-12 form-group">
+                            <!-- <input class="form-control" placeholder="dd-mm-yyyy" (click)="d.toggle()"
+                            name="dp" formControlName="date" ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker" autocomplete="off"> -->
+                            
+                            <div id="input_date" class="example-full-width" appearance="fill"   >
+                                <mat-label>Date de départ: </mat-label>
+                                <input readonly  name="dp"  matInput formControlName="date" id="date" autocomplete="off" placeholder="dd/mm/yyyy" (click)="d.toggle()"
+                                 ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker"> 
+                            </div>
+                              <ng-template #footerTemplate>
+                                <hr class="my-0">
+                                <!-- <button class="btn btn-primary btn-sm m-2 float-left" (click)="date = today; d.close()">Today</button> -->
+                                <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">Close</button>
+                                <span class="btn btn-danger btn-sm m-2 float-center" (click)="effacer_date();d.close()" >Effacer</span>
+                              </ng-template>
+                            <!-- <span style="color: red;" class="error" *ngIf="user_form.controls['date'].invalid && (user_form.controls['date'].dirty || user_form.controls['date'].touched)" >
+                                Verifier bien ce champ
+                            </span>  -->
+    
+                        </div>
+                        <div class="col-md-3 sm-12 xs-12 form-group"  *ngIf="!trajet_libre">
+                        
+                            <mat-form-field appearance="fill"  style="width: 100%;" >
+                              <mat-label>Heure<span style="color: red;">*</span></mat-label>
+                              <mat-select formControlName="heure" >
+                                  <mat-option  [value]="" style="color: red;">
+                                      NULL
+                                    </mat-option>
+                                <mat-option *ngFor="let r of heure" [value]="r">
+                                  {{r}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['heure'].invalid && (user_form.controls['heure'].dirty || user_form.controls['heure'].touched)" >
+                                Verifier bien ce champ
+                            </span>
+                        </div>
+                        <div class="col-md-3 sm-12 xs-12 form-group"  *ngIf="!trajet_libre">
+                        
+                            <mat-form-field appearance="fill"  style="width: 100%;" >
+                              <mat-label>Minute<span style="color: red;">*</span></mat-label>
+                              <mat-select formControlName="min" >
+                                  <mat-option  [value]="" style="color: red;">
+                                      NULL
+                                    </mat-option>
+                                <mat-option *ngFor="let m of min" [value]="m.id">
+                                  {{m.value}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['min'].invalid && (user_form.controls['min'].dirty || user_form.controls['min'].touched)" >
+                                Verifier bien ce champ
+                            </span>
+                        </div>
+                       
+                    </div>
+
+                    <div class="container-fluid row" >
+
+
+                        <div class="col-md-6 sm-12 xs-12 form-group">
+                        
+                            <mat-form-field appearance="fill"  style="width: 100%;" >
+                              <mat-label>Vehicule<span style="color: red;">*</span></mat-label>
+                              <mat-select formControlName="vehicule" (selectionChange)="select_vehicule($event,content1)">
+                                  <mat-option  [value]="" style="color: red;">
+                                      NULL
+                                    </mat-option>
+                                <mat-option *ngFor="let r of vehicules" [value]="r.ID_VEHICULE">
+                                  {{r.PLAQUE}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['vehicule'].invalid && (user_form.controls['vehicule'].dirty || user_form.controls['vehicule'].touched)" >
+                                Verifier bien ce champ
+                            </span>
+                        </div>
+                        <div class="col-md-6 sm-12 xs-12 form-group">
+                        
+                            <mat-form-field appearance="fill"  style="width: 100%;" >
+                              <mat-label>Chauffeur<span style="color: red;">*</span></mat-label>
+                              <mat-select formControlName="chauffeur"  (selectionChange)="select_chauffeur($event,content)">
+                                  <mat-option  [value]="" style="color: red;">
+                                      NULL
+                                    </mat-option>
+                                <mat-option *ngFor="let r of chauffeurs" [value]="r.ID">
+                                  {{r.NOM}} {{r.PRENOM}} ({{r.TELEPHONE}})
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['chauffeur'].invalid && (user_form.controls['chauffeur'].dirty || user_form.controls['chauffeur'].touched)" >
+                                Verifier bien ce champ
+                            </span>
+                        </div>
+                        <div class="col-md-6 sm-12 xs-12 form-group">
+                            <mat-form-field appearance="fill"  style="width: 100%;">
+                                <mat-label>Type Itinéraire: <span style="color: red;">*</span></mat-label>
+                                <mat-select formControlName="type"  (selectionChange)="select_type($event)">
+                                  
+                                  
+                                      <mat-option  [value]="0" style="color: red;">
+                                        NULL
+                                      </mat-option>
+                                      <mat-option *ngFor="let inf of info_type" [value]="inf.id">
+                                        {{inf.value}}
+                                      </mat-option>
+                                  
+                                </mat-select>
+                              </mat-form-field>                      
+                        </div>
+                        <div class="col-md-6 sm-12 xs-12 form-group">
+                            <mat-form-field appearance="fill"  style="width: 100%;">
+                                <mat-label>Itinéraire: <span style="color: red;">*</span></mat-label>
+                                <mat-select formControlName="itineraire" (click)="refresh_prov()">
+                                  <!-- <input matInput formControlName="nom1" id="nom1" autocomplete="off" >  -->
+                                  <mat-option>
+                                    <ngx-mat-select-search formControlName="filter_iti"
+                                    placeholderLabel="Research..." 
+                                     (keyup)="onKey($event.target.value)" (click)="refresh_prov()"></ngx-mat-select-search>
+                                  
+                                  </mat-option>
+                                      <mat-option  [value]="0" style="color: red;">
+                                        NULL
+                                      </mat-option>
+                                  <mat-option *ngFor="let iti of itineraire_filtre" [value]="iti.ID_IT">
+                                    {{iti.ITINERAIRE}} ({{iti.PRIX}})
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>                      
+                        </div>
+                       
+                    </div>
+
+
+
+                    <div class="col-md-12 form-group">
+    
+                            <input type="submit" id="submit"  class="btn btn-light active form-control" value="Mis à jour">    
+                        
+                    </div>
+                </fieldset>
+                </form><p>
+          </tab>
+          
+        </tabset>
+      </div><!--/.col-->
+
+
+    </div><!--/.row-->
+  </div>
+  

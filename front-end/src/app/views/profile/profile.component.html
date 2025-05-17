@@ -1,0 +1,333 @@
+<div class="container-fluid">
+    <div class="main-body" style="margin-left: -30px;;margin-right: -30px;">
+        <div class="row">
+            <div class="col-xl-2 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img [src]="foto" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                            <div class="mt-3">
+                                <h4>{{user[0].NOM}} {{user[0].PRENOM}}</h4>
+                                <p class="text-muted font-size-sm"><b>Poste: </b>{{user[0].DESCRIPTION_POSTE}}</p>
+                                <p class="text-muted font-size-sm"><b>Roles: </b>{{roles}}</p>
+                                
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-10 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+           
+                        <form [formGroup]="user_form"   (ngSubmit)="submit()">
+                            <fieldset class="border p-2" ><legend class="w-auto" >Informations</legend>
+            
+                                
+                           <div class="container-fluid row" >
+                                 
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                    <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                        <mat-label>Nom: <span style="color: red;">*</span></mat-label>
+                                        <input matInput formControlName="nom" id="nom" autocomplete="off" [readonly]="type_user == 'EXTERNE'"> 
+                                        
+                                    </mat-form-field>
+
+                           
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['nom'].invalid && (user_form.controls['nom'].dirty || user_form.controls['nom'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                                </div>
+                            
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                
+                            <!-- <input type="text" formControlName="prenom" id="prenom" class="form-control input-sm" autocomplete="off" required> -->
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>Prenom: <span style="color: red;">*</span></mat-label>
+                                <input matInput formControlName="prenom" id="prenom" autocomplete="off"  [readonly]="type_user == 'EXTERNE'"> 
+                            </mat-form-field>
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['prenom'].invalid && (user_form.controls['prenom'].dirty || user_form.controls['prenom'].touched)" >
+                                Verifier bien ce champ
+                            </span>     
+                                </div>
+                            </div>
+                            <div class="container-fluid row" >
+                                 
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                
+                            <!-- <input type="number" formControlName="tel" id="tel" class="form-control input-sm" autocomplete="off" >  -->
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>Téléphone: <span style="color: red;">*</span></mat-label>
+                                <input matInput formControlName="tel" id="tel" autocomplete="off"  [readonly]="type_user == 'EXTERNE'"> 
+                            </mat-form-field>
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['tel'].invalid && (user_form.controls['tel'].dirty || user_form.controls['tel'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                                </div>
+                                
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                
+                            <!-- <input type="email" formControlName="email" id="email" class="form-control input-sm" autocomplete="off" > -->
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>Email: <span style="color: red;">*</span></mat-label>
+                                <input matInput formControlName="email" id="email" autocomplete="off"  [readonly]="type_user == 'EXTERNE'"> 
+                            </mat-form-field>
+
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['email'].invalid && (user_form.controls['email'].dirty || user_form.controls['email'].touched)" >
+                                Verifier bien ce champ
+                            </span>      
+                                </div>
+                            </div>
+                            <div class="container-fluid row" >
+                                
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                
+                            <!-- <input type="text" formControlName="username" id="username" class="form-control input-sm" autocomplete="off" >  -->
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>username: <span style="color: red;">*</span></mat-label>
+                                <input matInput formControlName="username" id="username" autocomplete="off"  [readonly]="type_user == 'EXTERNE'"> 
+                            </mat-form-field>
+
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['username'].invalid && (user_form.controls['username'].dirty || user_form.controls['username'].touched)" >
+                                Verifier bien ce champ
+                            </span>    
+                                </div>
+                                
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                
+                            <!-- <input type="password" formControlName="pwd" id="pwd" class="form-control input-sm" autocomplete="off" required>        -->
+                            <div class="input-group">
+                                <!-- <input class="form-control input-sm" id="pwd"
+                                [type]="showPasswordOnPress ? 'text' : 'password'" formControlName="pwd"  autocomplete="off" appPassword/> -->
+                                <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                    <mat-label>Mot de passe: </mat-label>
+                                    <input  [type]="showPasswordOnPress ? 'text' : 'password'" matInput formControlName="pwd" id="pwd" autocomplete="off" > 
+                                </mat-form-field>
+                                
+                            </div>  
+                            <span style="color: red;" class="error" *ngIf="user_form.controls['pwd'].invalid && (user_form.controls['pwd'].dirty || user_form.controls['pwd'].touched)" >
+                                Verifier bien ce champ
+                            </span>
+                        </div>
+                            </div>
+                            <div class="container-fluid row" >
+                                
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                
+                                
+                                <!-- <mat-form-field appearance="fill" style="width: 100%;">
+                                    <mat-label>Unité d'organisation</mat-label>
+                                    <select class="" id="service" matNativeControl formControlName="service" (change)="selectservice()">
+                
+                                        <option *ngFor="let serv of serviceInfo" [value]="serv.ID_SERVICE">
+                                            {{serv.DESCRIPTION}}
+                                        </option>
+                    
+                                        
+                                        </select>
+                                  </mat-form-field> -->
+                                  <mat-form-field appearance="fill"  style="width: 100%;" >
+                                    <mat-label>Unité d'organisation</mat-label>
+                                    <mat-select formControlName="service" (change)="selectPoste()"  disabled>
+                                        <mat-option  [value]="" style="color: red;">
+                                            NULL
+                                          </mat-option>
+                                      <mat-option *ngFor="let serv of serviceInfo" [value]="serv.ID_SERVICE">
+                                        {{serv.DESCRIPTION}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                  <!-- <option *ngFor="let option of cars" [value]="option.value"
+                                    [selected]="selectedCar === option.value">{{ option.viewValue }}</option> -->
+                                <!-- <input type="text" formControlName="service1" id="service1" class="form-control input-sm" autocomplete="off" style="display: none;"> -->
+                                </div>
+                                
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                    <!-- <input class="form-control" placeholder="dd-mm-yyyy" (click)="d.toggle()"
+                                    name="dp" formControlName="date" ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker" autocomplete="off"> -->
+                                    
+                                    <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;" >
+                                        <mat-label>Date d'embauche: </mat-label>
+                                        <input  name="dp"  matInput formControlName="date" id="date" autocomplete="off" placeholder="dd-mm-yyyy" (click)="d.toggle()"
+                                         ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker" disabled> 
+                                    </mat-form-field>
+                                      <ng-template #footerTemplate>
+                                        <hr class="my-0">
+                                        <!-- <button class="btn btn-primary btn-sm m-2 float-left" (click)="date = today; d.close()">Today</button> -->
+                                        <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">Close</button>
+                                        <span class="btn btn-danger btn-sm m-2 float-center" (click)="effacer_date();d.close()" >Effacer</span>
+                                      </ng-template>
+                                    <span style="color: red;" class="error" *ngIf="user_form.controls['date'].invalid && (user_form.controls['date'].dirty || user_form.controls['date'].touched)" >
+                                        Verifier bien ce champ
+                                    </span> 
+            
+                                </div>
+                               
+                            </div>
+                            <div class="container-fluid row" >
+                                
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                
+                               
+                              <mat-form-field appearance="fill"  style="width: 100%;">
+                                <mat-label>Poste</mat-label>
+                                <mat-select formControlName="poste"   (selectionChange)="selectPoste($event)" disabled>
+                                    <mat-option  [value]="" style="color: red;">
+                                        NULL
+                                      </mat-option>
+                                  <mat-option *ngFor="let pst of posteInfo" [value]="pst.ID_POSTE">
+                                    {{pst.DESCRIPTION_POSTE}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </div>
+                                
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                
+                            <!-- <input type="text" formControlName="matricule" id="matricule" class="form-control input-sm" autocomplete="off" >  -->
+                            <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                <mat-label>Matricule: </mat-label>
+                                <input  name="dp"  matInput formControlName="matricule" id="matricule" autocomplete="off" > 
+                            </mat-form-field>
+                                </div>
+            
+                                
+                            </div>
+                            <div class="container-fluid row" >
+                                
+                                
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                    <!-- <ngx-bootstrap-multiselect  [options]="myOptions" [settings]="mySettings" [texts]="myTexts" formControlName="profil" (ngModelChange)="onChange($event)" ></ngx-bootstrap-multiselect> -->
+                                    <mat-form-field appearance="fill"  style="width: 100%;">
+                                        <mat-label>Fonction (multi-select):</mat-label>
+                                        <mat-select formControlName="profil" multiple (selectionChange)="selectPoste($event)" disabled>
+                                          <!-- <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option> -->
+                                          <mat-option *ngFor="let fct of fonctionInfo" [value]="fct.ID_ROLE">
+                                            {{fct.DESCRIPTION_ROLE}}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                    <!-- <ngx-bootstrap-multiselect  [options]="myOptions" [settings]="mySettings" [texts]="myTexts" formControlName="profil" (ngModelChange)="onChange($event)" ></ngx-bootstrap-multiselect> -->
+                                   
+                                    
+                                    <mat-form-field appearance="fill"  style="width: 100%;">
+                                        <mat-label>Genre:</mat-label>
+                                        <mat-select formControlName="genre" >
+                                          <!-- <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option> -->
+                                          <mat-option [value]="1">
+                                            MASCULIN
+                                          </mat-option>
+                                          <mat-option [value]="2">
+                                            FEMININ
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                      <span style="color: red;" class="error" *ngIf="user_form.controls['genre'].invalid && (user_form.controls['genre'].dirty || user_form.controls['genre'].touched)" >
+                                        Verifier bien ce champ
+                                    </span> 
+                                </div>
+                               
+                                
+                            </div>
+                            <div class="container-fluid row" >
+                                
+                                <div class="col-md-6 sm-12 xs-12 form-group">
+                                    <label>Photo: <span style="color: red;">*</span></label>
+                                <!-- </div> -->
+                                <div class="col-md-4 sm-12 xs-12 form-group">
+                                
+                            <input placeholder="photo" type="file" formControlName="foto" id="foto" accept="image/*"  autocomplete="off" (change)="fileChangeEvent($event)"> 
+                            <!-- <mat-form-field>
+                                <input type="file" formControlName="foto" id="foto" accept="image/*" class="form-control input-sm" autocomplete="off" (change)="fileChangeEvent($event)">
+                              </mat-form-field>
+             -->
+                              
+                                </div>
+                            </div>
+                                <div class="col-md-6 sm-12 xs-12 form-group" id="sign">
+                                    <h6> Signez ici(Signature)</h6>
+                                    <div *ngIf="!signatureImg">
+                                    
+                                        <div  class="signature-container" style="background-color: #ededed; height: 200px;color: blue;width: 340px;">
+                                        <signature-pad [options]="signaturePadOptions" (onBeginEvent)="alert()" (onEndEvent)="drawComplete()" ></signature-pad>
+                                        </div>
+
+                                        <div class="buttons">
+                                        <button class="btn btn-danger" type="button" (click)="clearSignature()">Effacer</button>
+                                        <button class="btn btn-success" type="button" (click)="savePad()">Garder</button>
+                                        </div>
+                                    </div>
+
+                                        <div class="signature-image" *ngIf="signatureImg" style="height: 250px;">
+                                            <button  class="btn btn-info" type="button" (click)="refaire()">Refaire la signature</button>
+                                        <img src='{{ signatureImg }}' />
+                                        
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <image-cropper
+                                    [imageChangedEvent]="imageChangedEvent"
+                                    [maintainAspectRatio]="true"
+                                    [aspectRatio]="4 / 4"
+                                    format="png"
+                                    (imageCropped)="imageCropped($event)"
+                                    (imageLoaded)="imageLoaded()"
+                                    (cropperReady)="cropperReady()"
+                                    (loadImageFailed)="loadImageFailed()"
+                                ></image-cropper>
+                                            
+                                </div>
+                                
+                                <div class="col-md-3 ">
+                                    <img *ngIf="croppedImage" [src]="croppedImage"  style="width: 100%;"/>
+                                </div>
+                             </div>
+                            <div class="col-md-12 form-group">
+            
+                                    <input type="submit" id="submit"  class="btn btn-light active form-control" value="Mis à jour">    
+                                
+                            </div>
+                        </fieldset>
+                        </form><p>
+            
+                   </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="d-flex align-items-center mb-3">Project Status</h5>
+                                <p>Web Design</p>
+                                <div class="progress mb-3" style="height: 5px">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p>Website Markup</p>
+                                <div class="progress mb-3" style="height: 5px">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p>One Page</p>
+                                <div class="progress mb-3" style="height: 5px">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p>Mobile Template</p>
+                                <div class="progress mb-3" style="height: 5px">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p>Backend API</p>
+                                <div class="progress" style="height: 5px">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

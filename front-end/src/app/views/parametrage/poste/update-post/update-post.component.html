@@ -1,0 +1,85 @@
+
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12 mb-12" >
+          
+          
+        <!-- Nav tabs -->
+        <tabset >
+         
+
+
+          <tab heading="Modification poste">
+           
+            <form [formGroup]="user_form"   (ngSubmit)="submit()">
+                <fieldset class="border p-2" ><legend class="w-auto" >Modification d'Un poste</legend>
+
+               <div class="container-fluid row" >
+                     
+                    <div class="col-md-4 sm-12 xs-12 form-group">
+                    
+                        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                            <mat-label>Poste: <span style="color: red;">*</span></mat-label>
+                            <input matInput formControlName="nom" id="nom" autocomplete="off" > 
+                            
+                        </mat-form-field>
+
+                        <span style="color: red;" class="error" *ngIf="user_form.controls['nom'].invalid && (user_form.controls['nom'].dirty || user_form.controls['nom'].touched)" >
+                            Verifier bien ce champ
+                        </span>      
+                    </div>
+                    <div class="col-md-4 sm-12 xs-12 form-group">
+                    
+                        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                            <mat-label>Abreviation:</mat-label>
+                            <input matInput formControlName="abr" id="nom" autocomplete="off" > 
+                            
+                        </mat-form-field>
+
+                              
+                    </div>
+
+                    <div class="col-md-4 sm-12 xs-12 form-group">
+                        <mat-form-field appearance="fill"  style="width: 100%;">
+                            <mat-label>Unité d'organisation: <span style="color: red;">*</span></mat-label>
+                            <mat-select formControlName="id_un" (click)="refresh()" >
+                              <!-- <input matInput formControlName="nom1" id="nom1" autocomplete="off" >  -->
+                              <mat-option>
+                                <ngx-mat-select-search formControlName="filter"
+                                placeholderLabel="Research..." 
+                                 (keyup)="onKey($event.target.value)" (click)="refresh()"></ngx-mat-select-search>
+                              
+                              </mat-option>
+                                  <mat-option  [value]="" style="color: red;">
+                                    NULL
+                                  </mat-option>
+                              <mat-option *ngFor="let util of ou_filtre" [value]="util.ID_SERVICE">
+                                {{util.DESCRIPTION}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <span style="color: red;" class="error" *ngIf="user_form.controls['id_un'].invalid && (user_form.controls['id_un'].dirty || user_form.controls['id_un'].touched)" >
+                            Verifier bien ce champ
+                        </span> 
+                    </div>
+                   
+                   
+                </div>
+                <div class="col-md-12 form-group">
+
+                    <input type="submit" id="submit"  class="btn btn-light active form-control" value="Update">    
+                
+            </div>
+               
+            </fieldset>
+            </form><p>
+
+          </tab>
+          
+        </tabset>
+      </div><!--/.col-->
+
+
+    </div><!--/.row-->
+  </div>
+  

@@ -1,0 +1,167 @@
+
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12 mb-12" >
+        <form [formGroup]="user_form"   (ngSubmit)="submit()">
+            
+
+           <div class="container-fluid row" >
+                 
+
+                <div class="col-md-4 sm-12 xs-12 form-group">
+                    <mat-form-field appearance="fill"  style="width: 100%;">
+                        <mat-label>Province: <span style="color: red;">*</span></mat-label>
+                        <mat-select formControlName="province_id" (click)="refresh_prov()" (selectionChange)="select_province($event)">
+                          <!-- <input matInput formControlName="nom1" id="nom1" autocomplete="off" >  -->
+                          <mat-option>
+                            <ngx-mat-select-search formControlName="filter_prov"
+                            placeholderLabel="Research..." 
+                             (keyup)="onKey($event.target.value)" (click)="refresh_prov()"></ngx-mat-select-search>
+                          
+                          </mat-option>
+                              <mat-option  [value]="0" style="color: red;">
+                                NULL
+                              </mat-option>
+                          <mat-option *ngFor="let prov of provinces_filtre" [value]="prov.PROVINCE_ID">
+                            {{prov.PROVINCE_NAME}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>                      
+                </div>
+                <div class="col-md-4 sm-12 xs-12 form-group">
+                    <mat-form-field appearance="fill"  style="width: 100%;">
+                        <mat-label>Commune: </mat-label>
+                        <mat-select formControlName="commune_id" (click)="refresh_com()" (selectionChange)="select_commune($event)">
+                          <!-- <input matInput formControlName="nom1" id="nom1" autocomplete="off" >  -->
+                          <mat-option>
+                            <ngx-mat-select-search formControlName="filter_com"
+                            placeholderLabel="Research..." 
+                             (keyup)="onKey_com($event.target.value)" (click)="refresh_com()"></ngx-mat-select-search>
+                          
+                          </mat-option>
+                              <mat-option  [value]="0" style="color: red;">
+                                NULL
+                              </mat-option>
+                          <mat-option *ngFor="let com of commune_filtre" [value]="com.COMMUNE_ID">
+                            {{com.COMMUNE_NAME}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>                      
+                </div>
+                <div class="col-md-4 sm-12 xs-12 form-group">
+                    <mat-form-field appearance="fill"  style="width: 100%;">
+                        <mat-label>Zone: </mat-label>
+                        <mat-select formControlName="zone_id" (click)="refresh_zone()" (selectionChange)="select_zone($event)">
+                          <!-- <input matInput formControlName="nom1" id="nom1" autocomplete="off" >  -->
+                          <mat-option>
+                            <ngx-mat-select-search formControlName="filter_zone"
+                            placeholderLabel="Research..." 
+                            (keyup)="onKey_zone($event.target.value)" (click)="refresh_zone()"></ngx-mat-select-search>
+                          
+                          </mat-option>
+                              <mat-option  [value]="0" style="color: red;">
+                                NULL
+                              </mat-option>
+                          <mat-option *ngFor="let zone of zone_filtre" [value]="zone.ZONE_ID">
+                            {{zone.ZONE_NAME}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>                      
+                </div>
+                <!-- <div class="col-md-3 sm-12 xs-12 form-group" *ngIf="id_commune>0">
+                    
+                    <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                        <mat-label>Zone: <span style="color: red;">*</span></mat-label>
+                        <input matInput formControlName="zone_id" id="zone_id" autocomplete="off" > 
+                        
+                    </mat-form-field>
+
+                    <span style="color: red;" class="error" *ngIf="user_form.controls['zone_id'].invalid && (user_form.controls['zone_id'].dirty || user_form.controls['zone_id'].touched)" >
+                        Verifier bien ce champ
+                    </span>      
+                </div> -->
+                <fieldset class="border p-2" ><legend class="w-auto" >Ajout d'un point de vente</legend>
+                <div class="row">
+                   
+                    <div class="col-md-3 sm-12 xs-12 form-group" >
+                    
+                        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                            <mat-label>Localité: <span style="color: red;">*</span></mat-label>
+                            <input matInput formControlName="localite" id="localite" autocomplete="off" > 
+                            
+                        </mat-form-field>
+    
+                        <span style="color: red;" class="error" *ngIf="user_form.controls['localite'].invalid && (user_form.controls['localite'].dirty || user_form.controls['localite'].touched)" >
+                            Verifier bien ce champ
+                        </span>      
+                    </div>
+                    <div class="col-md-3 sm-12 xs-12 form-group">
+                    
+                        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                            <mat-label>Point de vente: <span style="color: red;">*</span></mat-label>
+                            <input matInput formControlName="point_vente" id="point_vente" autocomplete="off" > 
+                            
+                        </mat-form-field>
+    
+                        <span style="color: red;" class="error" *ngIf="user_form.controls['point_vente'].invalid && (user_form.controls['point_vente'].dirty || user_form.controls['point_vente'].touched)" >
+                            Verifier bien ce champ
+                        </span>      
+                    </div>
+                    <div class="col-md-3 sm-12 xs-12 form-group" >
+                    
+                        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                            <mat-label>Latitude: <span style="color: red;">*</span></mat-label>
+                            <input matInput formControlName="latitude" id="latitude" autocomplete="off"> 
+                            
+                        </mat-form-field>
+    
+                        <span style="color: red;" class="error" *ngIf="user_form.controls['latitude'].invalid && (user_form.controls['latitude'].dirty || user_form.controls['latitude'].touched)" >
+                            Verifier bien ce champ
+                        </span>      
+                    </div>
+                    <div class="col-md-3 sm-12 xs-12 form-group" >
+                    
+                        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                            <mat-label>Longitude: <span style="color: red;">*</span></mat-label>
+                            <input matInput formControlName="longitude" id="longitude" autocomplete="off"> 
+                            
+                        </mat-form-field>
+    
+                        <span style="color: red;" class="error" *ngIf="user_form.controls['longitude'].invalid && (user_form.controls['longitude'].dirty || user_form.controls['longitude'].touched)" >
+                            Verifier bien ce champ
+                        </span>      
+                    </div>
+                   
+                </div>
+            
+                <div class="col-md-12 form-group" >
+
+                    <input type="submit" id="submit"  class="btn btn-primary active form-control" value="Enregistrer">    
+                
+                </div>
+                </fieldset>
+               
+               
+            </div>
+
+        </form><p>
+          
+        <!-- Nav tabs -->
+        <tabset >
+          <tab heading="Liste des points de vente de la Zone" style="overflow-x: scroll;">
+            <!-- <a class="dropdown-item" style="color: red;"  data-toggle="modal" (click)="dangerModal1.show()"><i class="fa fa-lock"></i> Logout</a> -->
+           
+            <div class="col-md-12 sm-12 xs-12">
+               
+            <table datatable [dtOptions]="dtOptions_province" class="table table-bordered" width="100%"></table>
+            
+            </div>
+          </tab>
+          
+        </tabset>
+      </div><!--/.col-->
+
+
+    </div><!--/.row-->
+  </div>
+  

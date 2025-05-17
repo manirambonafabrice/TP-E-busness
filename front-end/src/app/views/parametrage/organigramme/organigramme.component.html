@@ -1,0 +1,6 @@
+<h2>Hiérarchie de nos unités d'organisation</h2>
+<!-- <app-diagram *ngIf="diagram_load" (nodeClicked)='setSelectedNode($event)'></app-diagram> -->
+<app-diagram (nodeSelected)="showDetails($event)"
+(modelChanged)="onModelChanged($event)" (modelChange)='diagramModelChange($event)'>
+<!-- <app-inspector [selectedNode]='selectedNode' [model]='model'></app-inspector> -->
+
